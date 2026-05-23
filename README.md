@@ -55,22 +55,22 @@ The `load_classical_assets()` function was modified to check whether `rf_model.p
 @st.cache_resource
 def load_classical_assets():
     rf_filename = "rf_model.pkl"
-
+    
     if not os.path.exists(rf_filename):
-        with st.spinner("Downloading Random Forest model from Google Drive..."):
+        with st.spinner("Downloading Random Forest Model from Google Drive... Please wait."):
+            google_drive_id = '1oqtjMZw0L5QyJNeuOUMB8dOPcs10zw_J'
             try:
-                gdown.download(id='YOUR_GOOGLE_DRIVE_FILE_ID',
-                               output=rf_filename, quiet=False)
+                gdown.download(id=google_drive_id, output=rf_filename, quiet=False)
             except Exception as e:
-                st.error(f"Download failed: {e}")
+                st.error(f"Download failed. Error details: {e}")
                 st.stop()
-
+            
     return {
-        "svm":    joblib.load("svm_model.pkl"),
-        "rf":     joblib.load(rf_filename),
+        "svm": joblib.load("svm_model.pkl"),
+        "rf": joblib.load(rf_filename),
         "scaler": joblib.load("hog_scaler.pkl"),
-        "pca":    joblib.load("hog_pca.pkl"),
-        "le":     joblib.load("label_encoder.pkl"),
+        "pca": joblib.load("hog_pca.pkl"),
+        "le": joblib.load("label_encoder.pkl"),
     }
 ```
 
