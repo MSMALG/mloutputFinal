@@ -64,16 +64,24 @@ def load_dl_model():
       #  "le":     joblib.load("label_encoder.pkl"),
     #}
 
+
 @st.cache_resource
 def load_classical_assets():
     rf_filename = "rf_model.pkl"
     
-    # Automatically downloads the model from Google Drive if it isn't in the deployment workspace yet
     if not os.path.exists(rf_filename):
         with st.spinner("Downloading Random Forest Model from Google Drive... Please wait."):
             google_drive_id = '1oqtjMZw0L5QyJNeuOUMB8dOPcs10zw_J'
+            
+            # Using the modern direct download path format
             url = f'https://google.com{google_drive_id}'
-            gdown.download(url, rf_filename, quiet=False)
+            
+            try:
+                # fuzzy=True helps gdown handle redirects and security checks smoothly
+                gdown.download(url, rf_filename, quiet=False, fuzzy=True)
+            except Exception as e:
+                st.error(f"Download failed. Error details: {e}")
+                st.stop()
             
     return {
         "svm": joblib.load("svm_model.pkl"),
