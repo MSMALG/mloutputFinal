@@ -74,11 +74,11 @@ def load_classical_assets():
             google_drive_id = '1oqtjMZw0L5QyJNeuOUMB8dOPcs10zw_J'
             
             # Using the modern direct download path format
-            url = f'https://google.com{google_drive_id}'
+            #url = f'https://google.com{google_drive_id}'
             
             try:
                 # fuzzy=True helps gdown handle redirects and security checks smoothly
-                gdown.download(url, rf_filename, quiet=False, fuzzy=True)
+                gdown.download(id=google_drive_id, output=rf_filename, quiet=False)
             except Exception as e:
                 st.error(f"Download failed. Error details: {e}")
                 st.stop()
