@@ -54,6 +54,7 @@ st.markdown("""
 def load_dl_model():
     return tf.keras.models.load_model("best_model.keras")
 
+# Original Caching
 #@st.cache_resource
 #def load_classical_assets():
  #   return {
@@ -77,7 +78,6 @@ def load_classical_assets():
             #url = f'https://google.com{google_drive_id}'
             
             try:
-                # fuzzy=True helps gdown handle redirects and security checks smoothly
                 gdown.download(id=google_drive_id, output=rf_filename, quiet=False)
             except Exception as e:
                 st.error(f"Download failed. Error details: {e}")
