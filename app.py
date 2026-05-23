@@ -71,7 +71,7 @@ def load_classical_assets():
     # Automatically downloads the model from Google Drive if it isn't in the deployment workspace yet
     if not os.path.exists(rf_filename):
         with st.spinner("Downloading Random Forest Model from Google Drive... Please wait."):
-            google_drive_id = '1oqtjMZw0L5QyJNeuOUMB8dOPcs10zw_J/view?usp=drive_link'
+            google_drive_id = '1oqtjMZw0L5QyJNeuOUMB8dOPcs10zw_J'
             url = f'https://google.com{google_drive_id}'
             gdown.download(url, rf_filename, quiet=False)
             
